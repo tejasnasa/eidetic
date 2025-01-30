@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Modal from "../components/Modal"; // Import your Modal component
+"use client";
+
+import { useState, useEffect } from "react";
+import Modal from "@/components/Modal";
 
 const NumberMemory = () => {
   const [currentLevel, setCurrentLevel] = useState(1);
@@ -17,8 +19,14 @@ const NumberMemory = () => {
   const startGame = () => {
     setCurrentLevel(1);
     setGameState("idle");
-    setShowModal(false); // Hide modal when restarting
+    setShowModal(false);
     startNewLevel(1);
+  };
+
+  const restartGame = () => {
+    setCurrentLevel(1);
+    setGameState("idle");
+    setShowModal(false);
   };
 
   const startNewLevel = (level: number) => {
@@ -53,7 +61,7 @@ const NumberMemory = () => {
       }, 1000);
     } else {
       setGameState("incorrect");
-      setShowModal(true); // Show modal when user loses
+      setShowModal(true);
     }
   };
 
@@ -127,12 +135,11 @@ const NumberMemory = () => {
         </div>
       </div>
 
-      {/* Modal */}
       <Modal
         isOpen={showModal}
         title="Game Over!"
         message={`You reached level ${currentLevel}. The correct number was ${currentNumber}`}
-        onClose={startGame}
+        onClose={restartGame}
       />
     </section>
   );

@@ -1,5 +1,7 @@
+"use client"
+
 import { useState, useEffect } from "react";
-import Modal from "../components/Modal";
+import Modal from "@/components/Modal";
 
 const Tiles = () => {
   const [cards, setCards] = useState<any>([]);

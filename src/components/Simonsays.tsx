@@ -1,7 +1,18 @@
+"use client";
+
 import { useState, useEffect, useCallback } from "react";
 import { Heart } from "lucide-react";
-import { gameData } from "../lib/data";
-import Modal from "../components/Modal";
+import Modal from "@/components/Modal";
+
+const generateRandomSequence = (): number[][] => {
+  const getRandomNumber = () => Math.floor(Math.random() * 10);
+  const baseSequence = Array.from({ length: 25 }, () => getRandomNumber());
+  return Array.from({ length: 16 }, (_, index) => {
+    return baseSequence.slice(0, index + 1);
+  });
+};
+
+const gameData = generateRandomSequence();
 
 const Simon = () => {
   const [currentLevel, setCurrentLevel] = useState(0);
