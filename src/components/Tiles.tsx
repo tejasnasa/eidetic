@@ -12,7 +12,7 @@ const Tiles = () => {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
-  const symbols = ["🌟", "🎈"];
+  const symbols = ["🌟", "🎈", "🎮", "🎲", "🎯", "🎨", "🎭", "🎪", "💸"];
 
   const restartGame = () => {
     setCards([]);
@@ -85,55 +85,53 @@ const Tiles = () => {
   };
 
   return (
-    <main className="text-white h-dvh w-dvw">
-      <section className="max-w-2xl mx-auto p-4">
-        <div className="text-center mb-4">
-          <div className="flex justify-between mb-4">
-            <span className="font-bold">Moves: {moves}</span>
-            <span className="font-bold">Time: {timeElapsed}s</span>
-            <span className="font-bold">
-              Matches: {matched.length / 2}/{symbols.length}
-            </span>
-          </div>
+    <section className="max-w-2xl mx-auto p-4">
+      <div className="text-center mb-4">
+        <div className="flex justify-between mb-4">
+          <span className="font-bold">Moves: {moves}</span>
+          <span className="font-bold">Time: {timeElapsed}s</span>
+          <span className="font-bold">
+            Matches: {matched.length / 2}/{symbols.length}
+          </span>
+        </div>
 
-          {!gameStarted && (
-            <button
-              onClick={initializeGame}
-              className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+        {!gameStarted && (
+          <button
+            onClick={initializeGame}
+            className="bg-white hover:bg-gray-200 transition text-blue-600 font-extrabold font-mono px-6 py-4 rounded mb-4 text-2xl mt-[600px]"
+          >
+            Start Game
+          </button>
+        )}
+      </div>
+
+      <div className="grid grid-cols-6 gap-2">
+        {cards.map((card: any) => {
+          const isFlipped =
+            flipped.includes(card.id) || matched.includes(card.id);
+          return (
+            <div
+              key={card.id}
+              onClick={() => handleCardClick(card.id)}
+              className={`card ${isFlipped ? "flipped" : ""}`}
             >
-              Start Game
-            </button>
-          )}
-        </div>
-
-        <div className="grid grid-cols-6 gap-2">
-          {cards.map((card: any) => {
-            const isFlipped =
-              flipped.includes(card.id) || matched.includes(card.id);
-            return (
-              <div
-                key={card.id}
-                onClick={() => handleCardClick(card.id)}
-                className={`card ${isFlipped ? "flipped" : ""}`}
-              >
-                <div className="card-inner">
-                  <div className="card-front"></div>
-                  <div className="card-back">{card.symbol}</div>
-                </div>
+              <div className="card-inner">
+                <div className="card-front"></div>
+                <div className="card-back text-5xl">{card.symbol}</div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
+      </div>
 
-        <TileModal
-          value={timeElapsed}
-          isOpen={showModal}
-          title="Congratulations!"
-          message={`You finished in ${moves} moves and ${timeElapsed} seconds!`}
-          onClose={restartGame}
-        />
-      </section>
-    </main>
+      <TileModal
+        value={timeElapsed}
+        isOpen={showModal}
+        title="Congratulations!"
+        message={`You finished in ${moves} moves and ${timeElapsed} seconds!`}
+        onClose={restartGame}
+      />
+    </section>
   );
 };
 
