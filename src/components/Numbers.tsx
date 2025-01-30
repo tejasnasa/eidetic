@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Modal from "@/components/Modal";
+import NumberModal from "@/components/NumberModal";
 
 const NumberMemory = () => {
   const [currentLevel, setCurrentLevel] = useState(1);
@@ -135,7 +135,8 @@ const NumberMemory = () => {
         </div>
       </div>
 
-      <Modal
+      <NumberModal
+        value={currentLevel}
         isOpen={showModal}
         title="Game Over!"
         message={`You reached level ${currentLevel}. The correct number was ${currentNumber}`}

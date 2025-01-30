@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Modal from "@/components/Modal";
+import TileModal from "@/components/TileModal";
 
 const Tiles = () => {
   const [cards, setCards] = useState<any>([]);
@@ -125,7 +125,7 @@ const Tiles = () => {
           })}
         </div>
 
-        <Modal
+        <TileModal
           value={timeElapsed}
           isOpen={showModal}
           title="Congratulations!"

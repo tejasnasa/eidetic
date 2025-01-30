@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Heart } from "lucide-react";
-import Modal from "@/components/Modal";
+import Modal from "@/components/TileModal";
+import SimonModal from "./SimonModal";
 
 const generateRandomSequence = (): number[][] => {
   const getRandomNumber = () => Math.floor(Math.random() * 10);
@@ -156,7 +157,8 @@ const Simon = () => {
           <p className="text-gray-600 mt-4">Your turn! Repeat the sequence.</p>
         )}
 
-        <Modal
+        <SimonModal
+          value={currentLevel + 1}
           isOpen={showModal}
           title="Game Over!"
           message={`You got upto level ${currentLevel + 1}`}
