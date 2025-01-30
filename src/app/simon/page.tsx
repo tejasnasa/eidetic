@@ -2,8 +2,8 @@ import Simon from "@/components/Simonsays";
 
 export default function SimonPage() {
   return (
-    <div>
+    <main className="h-dvh">
       <Simon />
-    </div>
+    </main>
   );
 }

@@ -108,7 +108,7 @@ const Simon = () => {
   };
 
   return (
-    <main className="bg-black text-white h-dvh w-dvw">
+    <main className=" text-white h-dvh w-dvw">
       <section className="max-w-2xl mx-auto p-6 text-center">
         <div className="mb-4">
           <h2 className="text-2xl font-bold mb-2">Block Sequence Memory</h2>

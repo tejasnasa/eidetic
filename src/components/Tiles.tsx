@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import Modal from "@/components/Modal";
@@ -12,7 +12,7 @@ const Tiles = () => {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
-  const symbols = ["🌟", "🎈", "🎮"];
+  const symbols = ["🌟", "🎈"];
 
   const restartGame = () => {
     setCards([]);
@@ -25,7 +25,7 @@ const Tiles = () => {
   };
 
   const initializeGame = () => {
-    const shuffled = [...symbols, ...symbols]
+    const shuffled = [...symbols, ...symbols, ...symbols, ...symbols]
       .sort(() => Math.random() - 0.5)
       .map((symbol, index) => ({
         id: index,
@@ -85,7 +85,7 @@ const Tiles = () => {
   };
 
   return (
-    <main className="bg-black text-white h-dvh w-dvw">
+    <main className="text-white h-dvh w-dvw">
       <section className="max-w-2xl mx-auto p-4">
         <div className="text-center mb-4">
           <div className="flex justify-between mb-4">
@@ -126,6 +126,7 @@ const Tiles = () => {
         </div>
 
         <Modal
+          value={timeElapsed}
           isOpen={showModal}
           title="Congratulations!"
           message={`You finished in ${moves} moves and ${timeElapsed} seconds!`}
