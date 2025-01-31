@@ -66,7 +66,6 @@ const Simon = () => {
       setHearts((prevHearts) => {
         const remainingHearts = prevHearts - 1;
         if (remainingHearts <= 0) {
-          const finalLevelValue = currentLevel + 1;
 
           setGameState("game-over");
           setShowModal(true);
@@ -82,7 +81,6 @@ const Simon = () => {
 
     if (newPlayerSequence.length === levelSequence.length) {
       if (currentLevel === gameData.length - 1) {
-        const finalLevelValue = currentLevel + 1;
         setGameState("game-over");
         setShowModal(true);
         return;
