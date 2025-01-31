@@ -36,7 +36,7 @@ export default async function RecordsPage({
 }: {
   searchParams: { table?: string };
 }) {
-  const table = searchParams.table || "numbers";
+  const table = (await searchParams).table || "numbers";
   const records = await getRecords(table);
   let i = 1;
 
