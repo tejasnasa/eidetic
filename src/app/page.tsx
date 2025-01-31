@@ -21,7 +21,7 @@ export default function Home() {
         </Link>
       </header>
 
-      <section className="mt-40 w-[80%] flex justify-between mx-auto">
+      <section className="mt-36 w-[80%] flex justify-between mx-auto">
         <Link href={"/tiles"} className="border-[1px] border-gray-700 w-[30%] p-4 hover:bg-black transition">
           <Image src={tiles} alt="" />
           <Image src={tlogo} alt="" className="mt-8" />

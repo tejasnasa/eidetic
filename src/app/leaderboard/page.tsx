@@ -1,8 +1,16 @@
 import { prisma } from "@/lib/prisma";
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Goback from "@/components/Goback";
+import Image from "next/image";
+import logo from "@/assets/leaderboards.png";
+
+type RecordType = {
+  id: string;
+  name: string;
+  level?: number;
+  time?: number;
+};
 
 async function getRecords(table: string) {
   switch (table) {
@@ -28,47 +36,83 @@ export default async function RecordsPage({
 }: {
   searchParams: { table?: string };
 }) {
-  const table = searchParams.table || "tiles";
+  const table = searchParams.table || "numbers";
   const records = await getRecords(table);
+  let i = 1;
 
   return (
-    <main className="max-w-xl mx-auto p-4 h-dvh">
+    <main className="w-dvw p-4 min-h-dvh">
       <Goback />
-      <h2 className="text-xl font-bold mb-4">
-        Viewing {table.toUpperCase()} Records
-      </h2>
+      <Image src={logo} alt="Leaderboards" className="mx-auto mt-8 mb-24" />
 
-      <div className="flex gap-2 mb-4">
+      <div className="flex mb-4 mx-auto w-[900px]">
         <Link
           href="?table=numbers"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className={`px-4 py-2  border-l-[1px] border-gray-400 ${
+            table === "numbers"
+              ? "text-[#181452] bg-white"
+              : "text-white bg-transparent"
+          }`}
         >
-          Numbers
+          Remember The Number
         </Link>
         <Link
           href="?table=simon"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className={`px-4 py-2 border-l-[1px] border-gray-400 ${
+            table === "simon"
+              ? "text-[#181452] bg-white"
+              : "text-white bg-transparent"
+          }`}
         >
-          Simon
+          Follow The Pattern
         </Link>
         <Link
           href="?table=tiles"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className={`px-4 py-2 border-x-[1px] border-gray-400 ${
+            table === "tiles"
+              ? "text-[#181452] bg-white"
+              : "text-white bg-transparent"
+          }`}
         >
-          Tiles
+          Match The Tiles
         </Link>
       </div>
 
-      {/* Records List */}
-      <Suspense fallback={<p>Loading...</p>}>
-        <ul className="border border-gray-600 rounded-lg p-4">
-          {records.map((record: any) => (
-            <li key={record.id} className="py-2 border-2 border-gray-500">
-              {record.name} - {record.level || record.time}s
-            </li>
+      <table className="mx-auto w-[900px] text-xl border-[1px] border-gray-400 p-2">
+        <thead>
+          <tr className="border-[1px] border-gray-400 p-2">
+            <th className="border-[1px] border-gray-400 p-4 w-20 text-center">
+              Rank
+            </th>
+            <th className="border-[1px] border-gray-400 p-4">Name</th>
+            <th className="border-[1px] border-gray-400 p-4">Record</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {records.map((record: RecordType) => (
+            <tr key={record.id} className="border-[1px] border-gray-400 p-2">
+              <td className="border-[1px] border-gray-400 p-2 pl-4 w-20 text-center">
+                {i++}
+              </td>
+              <td className="border-[1px] border-gray-400 p-2 pl-4">
+                {record.name}
+              </td>
+              <td className="border-[1px] border-gray-400 p-2 pl-4">
+                {record.level || record.time}
+              </td>
+            </tr>
           ))}
-        </ul>
-      </Suspense>
+        </tbody>
+      </table>
+
+      {/* <ul className="border border-gray-600 rounded-lg p-4 mx-auto w-[600px]">
+        {records.map((record: RecordType) => (
+          <li key={record.id} className="py-2 border-2 border-gray-400">
+            {i++} {record.name} - {record.level || record.time}s
+          </li>
+        ))}
+      </ul> */}
     </main>
   );
 }
