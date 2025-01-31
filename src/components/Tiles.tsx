@@ -45,7 +45,7 @@ const Tiles = () => {
 
   useEffect(() => {
     let timer: any;
-    if (gameStarted && matched.length < symbols.length * 2) {
+    if (gameStarted && matched.length < symbols.length * 4) {
       timer = setInterval(() => {
         setTimeElapsed((prev) => prev + 1);
       }, 1000);
@@ -54,7 +54,7 @@ const Tiles = () => {
   }, [gameStarted, matched.length]);
 
   useEffect(() => {
-    if (matched.length === symbols.length * 2) {
+    if (matched.length === symbols.length * 4) {
       setTimeout(() => setShowModal(true), 500);
     }
   }, [matched]);
@@ -91,7 +91,7 @@ const Tiles = () => {
           <span className="font-bold">Moves: {moves}</span>
           <span className="font-bold">Time: {timeElapsed}s</span>
           <span className="font-bold">
-            Matches: {matched.length / 2}/{symbols.length}
+            Matches: {matched.length / 2}/{symbols.length*2}
           </span>
         </div>
 

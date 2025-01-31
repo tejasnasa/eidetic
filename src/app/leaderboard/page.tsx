@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Goback from "@/components/Goback";
 
 async function getRecords(table: string) {
   switch (table) {
@@ -32,6 +33,7 @@ export default async function RecordsPage({
 
   return (
     <main className="max-w-xl mx-auto p-4 h-dvh">
+      <Goback />
       <h2 className="text-xl font-bold mb-4">
         Viewing {table.toUpperCase()} Records
       </h2>
