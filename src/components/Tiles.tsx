@@ -128,7 +128,6 @@ const Tiles = () => {
           );
         })}
       </div>
-
       <TileModal
         value={timeElapsed}
         isOpen={showModal}

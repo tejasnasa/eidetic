@@ -6,7 +6,7 @@ import { z } from "zod";
 
 export const saveTileRecord = async (values: z.infer<typeof tileSchema>) => {
   try {
-    await prisma.tilesRecord.create({
+    const savedRecord = await prisma.tilesRecord.create({
       data: values,
     });
   } catch (error) {
@@ -19,7 +19,7 @@ export const saveNumberRecord = async (
   values: z.infer<typeof numberSchema>
 ) => {
   try {
-    await prisma.numbersRecord.create({
+    const savedRecord = await prisma.numbersRecord.create({
       data: values,
     });
   } catch (error) {
@@ -30,7 +30,7 @@ export const saveNumberRecord = async (
 
 export const saveSimonRecord = async (values: z.infer<typeof simonSchema>) => {
   try {
-    await prisma.simonRecord.create({
+    const savedRecord = await prisma.simonRecord.create({
       data: values,
     });
   } catch (error) {

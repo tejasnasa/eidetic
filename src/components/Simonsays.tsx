@@ -22,6 +22,7 @@ const Simon = () => {
   const [lastErrorIndex, setLastErrorIndex] = useState<number | null>(null);
   const [activeBlock, setActiveBlock] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [finalLevel, setFinalLevel] = useState(-1);
 
   const showSequence = useCallback(() => {
     const levelSequence = gameData[currentLevel];
@@ -66,6 +67,9 @@ const Simon = () => {
       setHearts((prevHearts) => {
         const remainingHearts = prevHearts - 1;
         if (remainingHearts <= 0) {
+          const finalLevelValue = currentLevel + 1;
+          setFinalLevel(finalLevelValue);
+
           setGameState("game-over");
           setShowModal(true);
         }
@@ -80,6 +84,8 @@ const Simon = () => {
 
     if (newPlayerSequence.length === levelSequence.length) {
       if (currentLevel === gameData.length - 1) {
+        const finalLevelValue = currentLevel + 1;
+        setFinalLevel(finalLevelValue);
         setGameState("game-over");
         setShowModal(true);
         return;
@@ -133,20 +139,18 @@ const Simon = () => {
               }
               cursor-pointer
               rounded-lg text-xl font-bold transition-all duration-300 transform`}
-              >
-
-              </div>
+              ></div>
             ))}
           </div>
         )}
 
         {gameState === "idle" && (
           <button
-          onClick={startGame}
-          className="bg-white hover:bg-gray-200 transition text-blue-600 font-extrabold font-mono px-6 py-4 rounded mb-4 text-2xl mt-[500px]"
-        >
-          Start Game
-        </button>
+            onClick={startGame}
+            className="bg-white hover:bg-gray-200 transition text-blue-600 font-extrabold font-mono px-6 py-4 rounded mb-4 text-2xl mt-[500px]"
+          >
+            Start Game
+          </button>
         )}
 
         {gameState === "showing-sequence" && (

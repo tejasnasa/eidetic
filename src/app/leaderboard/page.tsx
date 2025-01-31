@@ -18,15 +18,15 @@ async function getRecords(table: string) {
   switch (table) {
     case "numbers":
       return await prisma.numbersRecord.findMany({
-        orderBy: { created_at: "desc" },
+        orderBy: { level: "desc" },
       });
     case "simon":
       return await prisma.simonRecord.findMany({
-        orderBy: { created_at: "desc" },
+        orderBy: { level: "desc" },
       });
     case "tiles":
       return await prisma.tilesRecord.findMany({
-        orderBy: { created_at: "desc" },
+        orderBy: { time: "asc" },
       });
     default:
       return notFound();
