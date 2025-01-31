@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Heart } from "lucide-react";
-import Modal from "@/components/TileModal";
 import SimonModal from "./SimonModal";
 
 const generateRandomSequence = (): number[][] => {
@@ -18,9 +17,9 @@ const gameData = generateRandomSequence();
 const Simon = () => {
   const [currentLevel, setCurrentLevel] = useState(0);
   const [gameState, setGameState] = useState("idle"); // idle, showing-sequence, player-turn, game-over
-  const [playerSequence, setPlayerSequence] = useState<any>([]);
+  const [playerSequence, setPlayerSequence] = useState<number[]>([]);
   const [hearts, setHearts] = useState(3);
-  const [lastErrorIndex, setLastErrorIndex] = useState(null);
+  const [lastErrorIndex, setLastErrorIndex] = useState<number | null>(null);
   const [activeBlock, setActiveBlock] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -57,7 +56,7 @@ const Simon = () => {
     setShowModal(false);
   };
 
-  const handleBlockClick = (blockIndex: any) => {
+  const handleBlockClick = (blockIndex: number) => {
     if (gameState !== "player-turn") return;
 
     const levelSequence = gameData[currentLevel];

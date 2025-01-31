@@ -3,8 +3,15 @@
 import { useState, useEffect } from "react";
 import TileModal from "@/components/TileModal";
 
+interface CardType {
+  id: number;
+  symbol: string;
+  isFlipped: boolean;
+  isMatched: boolean;
+}
+
 const Tiles = () => {
-  const [cards, setCards] = useState<any>([]);
+  const [cards, setCards] = useState<CardType[]>([]);
   const [flipped, setFlipped] = useState<number[]>([]);
   const [matched, setMatched] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
@@ -44,8 +51,8 @@ const Tiles = () => {
   };
 
   useEffect(() => {
-    let timer: any;
-    if (gameStarted && matched.length < symbols.length * 4) {
+    let timer: ReturnType<typeof setTimeout>;
+    if (gameStarted && matched.length < 36) {
       timer = setInterval(() => {
         setTimeElapsed((prev) => prev + 1);
       }, 1000);
@@ -54,7 +61,7 @@ const Tiles = () => {
   }, [gameStarted, matched.length]);
 
   useEffect(() => {
-    if (matched.length === symbols.length * 4) {
+    if (matched.length === 36) {
       setTimeout(() => setShowModal(true), 500);
     }
   }, [matched]);
@@ -70,10 +77,10 @@ const Tiles = () => {
       setMoves((prev) => prev + 1);
 
       const [firstId, secondId] = newFlipped;
-      const firstCard = cards.find((card: any) => card.id === firstId);
-      const secondCard = cards.find((card: any) => card.id === secondId);
+      const firstCard = cards.find((card: CardType) => card.id === firstId);
+      const secondCard = cards.find((card: CardType) => card.id === secondId);
 
-      if (firstCard.symbol === secondCard.symbol) {
+      if (firstCard!.symbol === secondCard!.symbol) {
         setMatched((prev) => [...prev, firstId, secondId]);
         setFlipped([]);
       } else {
@@ -90,9 +97,7 @@ const Tiles = () => {
         <div className="flex justify-between mb-4">
           <span className="font-bold">Moves: {moves}</span>
           <span className="font-bold">Time: {timeElapsed}s</span>
-          <span className="font-bold">
-            Matches: {matched.length / 2}/{symbols.length*2}
-          </span>
+          <span className="font-bold">Matches: {matched.length / 2}/18</span>
         </div>
 
         {!gameStarted && (
@@ -106,7 +111,7 @@ const Tiles = () => {
       </div>
 
       <div className="grid grid-cols-6 gap-2">
-        {cards.map((card: any) => {
+        {cards.map((card: CardType) => {
           const isFlipped =
             flipped.includes(card.id) || matched.includes(card.id);
           return (

@@ -25,7 +25,7 @@ const NumberModal: React.FC<ModalProps> = ({
     handleSubmit,
     register,
     setValue,
-    formState: { errors, isSubmitting, isDirty, isValid },
+    formState: { isSubmitting, isDirty, isValid },
   } = useForm<z.infer<typeof numberSchema>>({
     resolver: zodResolver(numberSchema),
     defaultValues: {
@@ -39,8 +39,12 @@ const NumberModal: React.FC<ModalProps> = ({
       console.log(values.level);
       await saveNumberRecord(values);
       onClose();
-    } catch (error: any) {
-      console.error("Error saving record:", error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error saving record:", error.message);
+      } else {
+        console.error("Unexpected error saving record:", error);
+      }
     }
   }
 

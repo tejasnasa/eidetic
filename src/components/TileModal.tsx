@@ -25,7 +25,7 @@ const TileModal: React.FC<ModalProps> = ({
     handleSubmit,
     register,
     setValue,
-    formState: { errors, isSubmitting, isDirty, isValid },
+    formState: { isSubmitting, isDirty, isValid },
   } = useForm<z.infer<typeof tileSchema>>({
     resolver: zodResolver(tileSchema),
     defaultValues: {
@@ -38,8 +38,12 @@ const TileModal: React.FC<ModalProps> = ({
     try {
       await saveTileRecord(values);
       onClose();
-    } catch (error: any) {
-      console.error("Error saving record:", error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error saving record:", error.message);
+      } else {
+        console.error("Unexpected error saving record:", error);
+      }
     }
   }
 
