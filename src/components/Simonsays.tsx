@@ -112,41 +112,42 @@ const Simon = () => {
     <main className=" text-white h-dvh w-dvw">
       <section className="max-w-2xl mx-auto p-6 text-center">
         <div className="mb-4">
-          <h2 className="text-2xl font-bold mb-2">Block Sequence Memory</h2>
           <div className="flex justify-between items-center">
             <span className="mr-4">Level: {currentLevel + 1}</span>
             <div className="flex space-x-1">{renderHearts()}</div>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mb-4">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((blockIndex) => (
-            <div
-              key={blockIndex}
-              onClick={() => handleBlockClick(blockIndex)}
-              className={`aspect-square flex items-center justify-center
+        {gameState !== "idle" && (
+          <div className="grid grid-cols-3 gap-4 mb-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((blockIndex) => (
+              <div
+                key={blockIndex}
+                onClick={() => handleBlockClick(blockIndex)}
+                className={`aspect-square flex items-center justify-center active:bg-blue-600
               ${
                 lastErrorIndex === blockIndex
                   ? "bg-red-300"
                   : activeBlock === blockIndex
-                  ? "bg-blue-500 text-white scale-95"
-                  : "bg-gray-300"
+                  ? "bg-blue-500 text-white scale-[0.85]"
+                  : "bg-blue-500"
               }
               cursor-pointer
               rounded-lg text-xl font-bold transition-all duration-300 transform`}
-            >
-              {blockIndex}
-            </div>
-          ))}
-        </div>
+              >
+
+              </div>
+            ))}
+          </div>
+        )}
 
         {gameState === "idle" && (
           <button
-            onClick={startGame}
-            className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-          >
-            Start Game
-          </button>
+          onClick={startGame}
+          className="bg-white hover:bg-gray-200 transition text-blue-600 font-extrabold font-mono px-6 py-4 rounded mb-4 text-2xl mt-[500px]"
+        >
+          Start Game
+        </button>
         )}
 
         {gameState === "showing-sequence" && (

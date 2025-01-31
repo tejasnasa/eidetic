@@ -74,41 +74,41 @@ const NumberMemory = () => {
   }, [gameState]);
 
   return (
-    <section className="max-w-md mx-auto p-6 border rounded-lg shadow-lg">
+    <section className="max-w-md mx-auto p-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold mb-4">Number Memory</h2>
 
         <div className="mb-4">
           <span className="text-lg font-semibold">Level: {currentLevel}</span>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 mt-[450px] mx-auto">
           {gameState === "showing" && (
-            <div className="text-4xl font-bold mb-4 font-mono">
+            <div className="text-8xl font-bold mb-4 font-mono">
               {currentNumber}
             </div>
           )}
 
           {gameState === "typing" && (
-            <form onSubmit={handleSubmit}>
-              <input
-                id="numberInput"
-                type="text"
-                inputMode="numeric"
-                pattern="\d*"
-                value={userInput}
-                onChange={handleInputChange}
-                className="w-full p-2 text-center text-2xl mb-4 border rounded"
-                autoFocus
-                placeholder="Type the number..."
-              />
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-              >
-                Submit
-              </button>
-            </form>
+            <form onSubmit={handleSubmit} className="flex flex-col items-center">
+            <input
+              id="numberInput"
+              type="text"
+              inputMode="numeric"
+              pattern="\d*"
+              value={userInput}
+              onChange={handleInputChange}
+              className="p-2 text-center text-5xl mb-4 border rounded text-white w-[800px] h-[100px] font-bold font-mono bg-transparent"
+              autoFocus
+              placeholder="Type the number..."
+            />
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded text-xl"
+            >
+              Submit
+            </button>
+          </form>
+
           )}
 
           {gameState === "correct" && (
@@ -119,11 +119,11 @@ const NumberMemory = () => {
 
           {gameState === "idle" && (
             <button
-              onClick={startGame}
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
-              Start Game
-            </button>
+            onClick={startGame}
+            className="bg-white hover:bg-gray-200 transition text-blue-600 font-extrabold font-mono px-6 py-4 rounded mb-4 text-2xl mt-[30px]"
+          >
+            Start Game
+          </button>
           )}
         </div>
 
