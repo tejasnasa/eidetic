@@ -12,6 +12,8 @@ type RecordType = {
   time?: number;
 };
 
+type SearchParams = Promise<{ [key: string]: string | undefined }>;
+
 async function getRecords(table: string) {
   switch (table) {
     case "numbers":
@@ -31,12 +33,11 @@ async function getRecords(table: string) {
   }
 }
 
-export default async function RecordsPage({
-  searchParams,
-}: {
-  searchParams: { table?: string };
+export default async function RecordsPage(props: {
+  searchParams: SearchParams;
 }) {
-  const table = (await searchParams).table || "numbers";
+  const searchParams = await props.searchParams;
+  const table = searchParams.table || "numbers";
   const records = await getRecords(table);
   let i = 1;
 
