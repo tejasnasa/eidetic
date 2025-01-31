@@ -22,7 +22,6 @@ const Simon = () => {
   const [lastErrorIndex, setLastErrorIndex] = useState<number | null>(null);
   const [activeBlock, setActiveBlock] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
-  const [finalLevel, setFinalLevel] = useState(-1);
 
   const showSequence = useCallback(() => {
     const levelSequence = gameData[currentLevel];
@@ -68,7 +67,6 @@ const Simon = () => {
         const remainingHearts = prevHearts - 1;
         if (remainingHearts <= 0) {
           const finalLevelValue = currentLevel + 1;
-          setFinalLevel(finalLevelValue);
 
           setGameState("game-over");
           setShowModal(true);
@@ -85,7 +83,6 @@ const Simon = () => {
     if (newPlayerSequence.length === levelSequence.length) {
       if (currentLevel === gameData.length - 1) {
         const finalLevelValue = currentLevel + 1;
-        setFinalLevel(finalLevelValue);
         setGameState("game-over");
         setShowModal(true);
         return;
